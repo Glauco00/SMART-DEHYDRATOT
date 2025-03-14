@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desidratador Smart - Monitoramento</title>
+    <style>
+        /* Reset básico para uma base limpa */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Definindo o estilo geral do body */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container principal para o conteúdo */
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Título principal */
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        /* Subtítulo */
+        h2 {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            font-weight: 300;
+            color: #ecf0f1;
+        }
+
+        /* Cartões de controle ou informações */
+        .card {
+            background: #2c3e50;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #ecf0f1;
+        }
+
+        .card p {
+            font-size: 1.1em;
+            text-align: center;
+            color: #bdc3c7;
+        }
+
+        /* Botões modernos */
+        button {
+            background-color: #1abc9c;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #16a085;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Layout responsivo */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            .card {
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SMART DEHYDRATOT</h1>
+        <h2>Dados em tempo real do seu desidratador</h2>
+
+        <div class="card">
+            <h3>Temperatura</h3>
+            <p><strong>Temperatura:</strong> <span id="temp">--</span> °C</p>
+        </div>
+
+        <div class="card">
+            <h3>Umidade</h3>
+            <p><strong>Umidade:</strong> <span id="umid">--</span> %</p>
+        </div>
+
+        <div class="card">
+            <h3>Chuva</h3>
+            <p><strong>Chuva:</strong> <span id="chuva">--</span></p>
+        </div>
+    </div>
+
+    <script>
+        async function atualizarDados() {
+            try {
+                const resposta = await fetch("http://localhost:3000/dados");
+                const dados = await resposta.json();
+                document.getElementById("temp").innerText = dados.temperatura;
+                document.getElementById("umid").innerText = dados.umidade;
+                document.getElementById("chuva").innerText = dados.chuva;
+            } catch (error) {
+                console.error("Erro ao obter dados:", error);
+            }
+        }
+
+        setInterval(atualizarDados, 2000);
+    </script>
+</body>
+</html>
