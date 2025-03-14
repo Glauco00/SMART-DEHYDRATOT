@@ -26,7 +26,7 @@ O **SMART DEHYDRATOT** é um sistema de monitoramento de umidade e temperatura p
 ## 4. Circuito Estrutural
 
 ### Conexão do Sensor DHT11
-![Circuito DHT11](SMART-DEHYDRATOT-main\assets\DHT11.jpg)
+![Circuito DHT11](SMART-DEHYDRATOT-main/assets/DHT11.jpg)
 
 ### Conexão do Sensor de Chuva
 ![Circuito Sensor de Chuva](SMART-DEHYDRATOT-main/assets/MHRD.jpg)
